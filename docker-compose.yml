@@ -1,0 +1,19 @@
+services:
+  ani-rss:
+    build:
+      context: .
+      dockerfile: Dockerfile.arm64
+    container_name: ani-rss
+    ports:
+      - "7789:7789"
+    environment:
+      TZ: Asia/Shanghai
+      CONFIG: /config
+      SERVER_PORT: 7789
+      PUID: 0
+      PGID: 0
+      UMASK: "022"
+      SWAGGER_ENABLED: "true"
+    volumes:
+      - ./config:/config
+    restart: unless-stopped
